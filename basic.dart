@@ -83,3 +83,117 @@ main() {
   print("4 times four is ${timesFour(4)}");
   print("2 x 2 x 2 is ${runTwice(2, timesTwo)}");
 }
+
+// Control flow
+
+// boolean type true, false
+bool isEven(int x) {
+  if (x % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+// 3항 연산자 사용 가능
+// bool isEven(int x) {
+//   return x % 2 == 0 ? true : false;
+// }
+// Arrow syntax 도 사용 가능
+// bool isEven(int x) => x % 2 == 0 ? true : false;
+
+// 정수(int)가 들어있는 List
+// getEvenNumvers로 붙어 받아온 int를 List로
+List<int> getEvenNumbers(Iterable<int> numbers) {
+  // 짝수를 저장해줄 변수 선언 , int로 된 빈 list
+  var evenNumbers = <int>[];
+
+  // A for-in loop.
+  // numbers가 1, 2, 3, 4, 5로 가정하다면
+  // 처음으로 body안에 1을 전달 , 조건에 만족하면 list에 추가
+  // 그 다음 2를 전달 ... 5까지 반복
+
+  for (var i in numbers) {
+    // A single-line if statement.
+    // isEven이 true라면 evenNumbers list에 isEven의 값을 추가
+    // 홀수면 pass
+    if (isEven(i)) evenNumbers.add(i);
+  }
+
+  // evenNumvers를 return
+  return evenNumbers;
+}
+
+main() {
+  // numbers의 data를 list로 만든다 
+  // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  // 0부터 시작
+  var numbers = List.generate(10, (i) => i);
+  print(getEvenNumbers(numbers));
+}
+
+// String 
+
+main() {
+  // single, double quato 둘 다 가능
+  print('a single quoted string');
+  print("a double quoted string");
+
+  // Strings can be combined with the + operator.
+  print('cat' + 'dog');
+
+  // Triple quotes define a multi-line string.
+  print('''triple quoted strings are for multiple lines''');
+
+  // Dart supports string interpolation.
+  // String 안에 변수값 포함하고 싶을 때
+
+  const pi = 3.14;
+  print('pi is $pi');
+
+  // print('pi is' + pi) 도 가능
+  // {} 있는 이유는 복잡한 계산, object안의 변수 값을 들여다 볼 때 필요
+  print('tau is ${2 * pi}');
+}
+
+// Class
+
+class Car {
+  int seats;
+  String color;
+
+//   constructor
+//   Car(int sts, String clr) {    
+//   [] 대괄호 지정하면 기본값, 옵션값이 된다, 넣어도 되고 안넣어도 된다
+//   기본값 특정한 값으로 지정 가능
+//   Car(int sts, [String clr = 'black']) {
+//     {} 중괄호 instance에 순서 상관 없이 쓰고 싶을 때
+//   중괄호 값도 옵션 , @required를 플러터에서 쓰면 꼭 들어가야하는 값 
+    Car ({int sts, String clr = 'black'}) {
+    this.seats = sts;
+    this.color = clr;
+  }
+  
+//   function
+  printVars() {
+    print('seat: $seats, color: $color');
+  }
+}
+
+main() {
+  // instance, object 둘 다 해당
+  // 생상된 차 라고 생각
+  // new Car(~~) 에서 new 사용 안해도 됨
+  // Car newCar = new Car(4, 'red');
+  // Car newCar = new Car(4);
+  Car new Car = new Car(clr: 'red', sts: 6);
+
+  // function 사용
+  newCar.printVars();
+
+  // function 미사용
+  // print('seat: ${newCar.seats}, color: ${newCar.color}');
+}
+
+// 생성자 간단하게 쓰고 싶을 떄 아래와 같이 사용 가능 
+Car({this.seats, this.color = "black"});
+Car new Car = Car (Color: 'red', seats: 6);
